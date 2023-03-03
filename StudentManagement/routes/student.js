@@ -2,17 +2,21 @@ const express = require ('express')
 const router  =express.Router();
  const student = require ('../modele/student')
 
- const studentController = require ('../controller/studentController')
+ const studentController = require ('../controller/studentController');
+const validate = require('../midell/validate');
 router.get('/show', (req,res,next)=>{
  res.send("hello");
 });
 
 router.get('/add/:nom/:mot/:status/:Numtel' , studentController.get)
-router.post('/new' , studentController.post)
+router.post('/new' ,validate, studentController.post)
 router.put('/update/:id' , studentController.update)
 router.delete('/delete/:id' , studentController.deletet)
 router.get('/getall' , studentController.getall)
 router.get('/getbyid/:id' , studentController.getbyid)
+router.get('/chat',(req,res,next)=>{
+    res.render("chat");
+})
 
 /*router.get('/add/:nom/:mot/:status/:Numtel', (req,res,next)=>{
     console.log("notre data : " +JSON.stringify(req.params))
